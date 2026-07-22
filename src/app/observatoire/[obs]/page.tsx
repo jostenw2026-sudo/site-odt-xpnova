@@ -21,7 +21,7 @@ export async function generateMetadata({
   return {
     title: `${o.title} — données sourcées`,
     description: `${o.short} Indicateurs sourcés (Banque mondiale/WDI), comparaisons CEMAC et enjeux territoriaux.`,
-    alternates: { canonical: `/observatoire/${o.slug}` },
+    alternates: { canonical: `/observatoire/${o.slug}`, languages: { fr: `/observatoire/${o.slug}`, en: `/en/observatoire/${o.slug}` } },
   };
 }
 

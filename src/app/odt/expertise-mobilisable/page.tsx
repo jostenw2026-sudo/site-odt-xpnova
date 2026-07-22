@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Expertise mobilisable — références documentées",
   description:
     "37 ans d'ingénierie des grands équipements publics (aéroports, stades, campus, eau, énergie) dans 6 pays — capacités mobilisables au service des programmes territoriaux.",
-  alternates: { canonical: "/odt/expertise-mobilisable" },
+  alternates: { canonical: "/odt/expertise-mobilisable", languages: { fr: "/odt/expertise-mobilisable", en: "/en/odt/expertise-mobilisable" } },
 };
 
 export default function ExpertisePage() {

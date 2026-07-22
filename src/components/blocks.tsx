@@ -1,15 +1,22 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { site, cta, nav, STATUTS, type StatutKey } from "@/content/site";
+import { siteEn, ctaEn, navEn, STATUTS_EN } from "@/content/en";
 import { Button } from "./ui";
 import { HeroTerritory } from "./illustrations";
 
-export function StatsBar({ tone = "light" }: { tone?: "navy" | "light" }) {
+type Lang = "fr" | "en";
+
+export function StatsBar({ tone = "light", lang = "fr" }: { tone?: "navy" | "light"; lang?: Lang }) {
   const dark = tone === "navy";
+  const stats = lang === "en" ? siteEn.proofStats : site.proofStats;
   return (
     <div className={dark ? "bg-navy text-white" : "border-b border-line bg-light text-ink"}>
       <div className="container-x grid grid-cols-2 gap-8 py-10 md:grid-cols-4">
-        {site.proofStats.map((s) => (
+        {stats.map((s) => (
           <div key={s.label} className="text-center">
             <div className="font-display text-4xl font-extrabold text-teal">{s.value}</div>
             <div className={`mt-1 text-sm ${dark ? "text-white/70" : "text-grey"}`}>{s.label}</div>
@@ -20,13 +27,13 @@ export function StatsBar({ tone = "light" }: { tone?: "navy" | "light" }) {
   );
 }
 
-/** Badge de statut — doctrine d'honnêteté : affiché sur tout programme. */
-export function StatutBadge({ statut }: { statut: StatutKey }) {
-  const s = STATUTS[statut];
+export function StatutBadge({ statut, lang = "fr" }: { statut: StatutKey; lang?: Lang }) {
+  const s = lang === "en" ? { ...STATUTS[statut], ...STATUTS_EN[statut] } : STATUTS[statut];
+  const tone = STATUTS[statut].tone;
   const cls =
-    s.tone === "teal"
+    tone === "teal"
       ? "bg-teal-soft text-navy border-teal/40"
-      : s.tone === "gold"
+      : tone === "gold"
         ? "bg-gold/15 text-navy border-gold/50"
         : "bg-navy text-white border-navy";
   return (
@@ -61,20 +68,24 @@ export function PageHero({
   );
 }
 
-export function CTABanner() {
+export function CTABanner({ lang = "fr" }: { lang?: Lang }) {
+  const en = lang === "en";
+  const CTA = en ? ctaEn : cta;
   return (
     <div className="bg-navy">
       <div className="container-x py-16 text-center">
-        <h2 className="title-1 !text-white">Parlons de votre territoire</h2>
+        <h2 className="title-1 !text-white">{en ? "Let's talk about your territory" : "Parlons de votre territoire"}</h2>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
-          Décrivez votre territoire et votre ambition : un premier retour sous {site.responsePromise} ouvrées.
+          {en
+            ? "Describe your territory and your ambition: a first response within 48 working hours."
+            : `Décrivez votre territoire et votre ambition : un premier retour sous ${site.responsePromise} ouvrées.`}
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <Button href={cta.primary.href} variant="primary">
-            {cta.primary.label}
+          <Button href={CTA.primary.href} variant="primary">
+            {CTA.primary.label}
           </Button>
-          <Button href={cta.secondary.href} variant="ghost">
-            {cta.secondary.label}
+          <Button href={CTA.secondary.href} variant="ghost">
+            {CTA.secondary.label}
           </Button>
         </div>
       </div>
@@ -83,13 +94,14 @@ export function CTABanner() {
   );
 }
 
-export function Breadcrumbs({ items }: { items: { label: string; href?: string }[] }) {
+export function Breadcrumbs({ items, lang = "fr" }: { items: { label: string; href?: string }[]; lang?: Lang }) {
+  const en = lang === "en";
   return (
-    <nav aria-label="Fil d'Ariane" className="container-x py-4 text-sm text-grey">
+    <nav aria-label={en ? "Breadcrumb" : "Fil d'Ariane"} className="container-x py-4 text-sm text-grey">
       <ol className="flex flex-wrap items-center gap-2">
         <li>
-          <Link href="/" className="no-underline hover:text-royal">
-            Accueil
+          <Link href={en ? "/en" : "/"} className="no-underline hover:text-royal">
+            {en ? "Home" : "Accueil"}
           </Link>
         </li>
         {items.map((it, i) => (
@@ -109,14 +121,21 @@ export function Breadcrumbs({ items }: { items: { label: string; href?: string }
   );
 }
 
-/** Bloc « Ingénierie assurée par XP-NOVA » — frontière de marque. */
-export function IngenierieXpNova({ liens }: { liens: { label: string; url: string }[] }) {
+export function IngenierieXpNova({
+  liens,
+  lang = "fr",
+}: {
+  liens: { label: string; url: string }[];
+  lang?: Lang;
+}) {
+  const en = lang === "en";
   return (
     <div className="rounded-lg border border-line bg-light p-6">
-      <p className="eyebrow">Ingénierie assurée par XP-NOVA</p>
+      <p className="eyebrow">{en ? "Engineering by XP-NOVA" : "Ingénierie assurée par XP-NOVA"}</p>
       <p className="mt-2 text-ink/90">
-        Les métiers qui outillent ce programme — études, AMO, maîtrise d&apos;œuvre, structuration —
-        sont portés par XP-NOVA, Bureau d&apos;Ingénierie Conseil.
+        {en
+          ? "The disciplines that equip this programme — studies, owner's engineering, works supervision, structuring — are carried by XP-NOVA, Engineering & Consulting Firm."
+          : "Les métiers qui outillent ce programme — études, AMO, maîtrise d'œuvre, structuration — sont portés par XP-NOVA, Bureau d'Ingénierie Conseil."}
       </p>
       <ul className="mt-3 flex flex-wrap gap-2">
         {liens.map((l) => (
@@ -135,6 +154,10 @@ export function IngenierieXpNova({ liens }: { liens: { label: string; url: strin
 }
 
 export default function Footer() {
+  const pathname = usePathname() ?? "/";
+  const en = pathname === "/en" || pathname.startsWith("/en/");
+  const NAV = en ? navEn : nav;
+  const S = en ? siteEn : site;
   return (
     <footer className="bg-navy text-white/80">
       <div className="h-1.5 bg-gold" />
@@ -142,20 +165,20 @@ export default function Footer() {
         <div>
           <Image
             src="/brand/logo_xpnova_white.png"
-            alt="XP-NOVA — Bureau d'Ingénierie Conseil"
+            alt="XP-NOVA"
             width={350}
             height={80}
             className="h-[70px] w-auto"
           />
           <p className="mt-4 max-w-xs text-sm text-white/70">
-            <strong className="text-white">ODT</strong> — {site.fullName}. {site.devise}
+            <strong className="text-white">ODT</strong> — {S.fullName}. {S.devise}
           </p>
-          <p className="mt-2 text-xs text-white/55">{site.rattachement}.</p>
+          <p className="mt-2 text-xs text-white/55">{S.rattachement}.</p>
         </div>
         <div>
-          <p className="mb-3 font-bold text-white">Navigation</p>
+          <p className="mb-3 font-bold text-white">{en ? "Navigation" : "Navigation"}</p>
           <ul className="space-y-2 text-sm">
-            {nav.map((n) => (
+            {NAV.map((n) => (
               <li key={n.href}>
                 <Link href={n.href} className="text-white/70 no-underline hover:text-gold">
                   {n.label}
@@ -165,9 +188,9 @@ export default function Footer() {
           </ul>
         </div>
         <div>
-          <p className="mb-3 font-bold text-white">Écosystème</p>
+          <p className="mb-3 font-bold text-white">{en ? "Ecosystem" : "Écosystème"}</p>
           <ul className="space-y-2 text-sm">
-            {site.ecosystem.map((e) => (
+            {S.ecosystem.map((e) => (
               <li key={e.key}>
                 <a href={e.url} className="text-white/70 hover:text-gold">
                   {e.name} — {e.tagline}
@@ -201,10 +224,10 @@ export default function Footer() {
           </p>
           <p className="flex gap-4">
             <Link href="/mentions-legales" className="text-white/55 no-underline hover:text-gold">
-              Mentions légales
+              {en ? "Legal notice" : "Mentions légales"}
             </Link>
             <Link href="/confidentialite" className="text-white/55 no-underline hover:text-gold">
-              Confidentialité
+              {en ? "Privacy" : "Confidentialité"}
             </Link>
           </p>
         </div>

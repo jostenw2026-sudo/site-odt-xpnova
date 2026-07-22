@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Gouvernance & conformité",
   description:
     "Rattachement juridique, gouvernance et conformité de l'ODT — une initiative de XP-NOVA SARL, Yaoundé.",
-  alternates: { canonical: "/odt/gouvernance" },
+  alternates: { canonical: "/odt/gouvernance", languages: { fr: "/odt/gouvernance", en: "/en/odt/gouvernance" } },
 };
 
 export default function GouvernancePage() {

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "Qu'est-ce que l'ODT ? — Un opérateur, pas un bureau d'études",
   description:
     "Le modèle ODT : comprendre, concevoir, financer, transformer. Une plateforme de transformation territoriale à l'interface des territoires, des bailleurs et des investisseurs.",
-  alternates: { canonical: "/odt" },
+  alternates: { canonical: "/odt", languages: { fr: "/odt", en: "/en/odt" } },
 };
 
 export default function OdtPage() {

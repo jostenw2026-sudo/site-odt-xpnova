@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "ESG, genre & inclusion",
   description:
     "Les engagements environnementaux, sociaux et de gouvernance de l'ODT : sauvegardes, inclusion, genre, qualité — intégrés dès la conception des programmes.",
-  alternates: { canonical: "/odt/esg-inclusion" },
+  alternates: { canonical: "/odt/esg-inclusion", languages: { fr: "/odt/esg-inclusion", en: "/en/odt/esg-inclusion" } },
 };
 
 const ENGAGEMENTS = [

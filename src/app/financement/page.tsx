@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Financement des territoires : bailleurs, PPP, fonds climat",
   description:
     "Préparer un projet territorial finançable : exigences des bailleurs, PPP, fonds climat, budgets publics — et la chaîne ODT qui rend un portefeuille bancable.",
-  alternates: { canonical: "/financement" },
+  alternates: { canonical: "/financement", languages: { fr: "/financement", en: "/en/financement" } },
 };
 
 const GUICHETS = [

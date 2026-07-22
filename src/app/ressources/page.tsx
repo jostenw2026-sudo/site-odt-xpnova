@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Ressources",
   description:
     "Note de présentation ODT, publications de l'Observatoire et documents institutionnels — téléchargements et accès sur demande.",
-  alternates: { canonical: "/ressources" },
+  alternates: { canonical: "/ressources", languages: { fr: "/ressources", en: "/en/ressources" } },
 };
 
 const RESSOURCES = [

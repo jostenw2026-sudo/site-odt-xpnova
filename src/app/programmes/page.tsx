@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Territoires & Programmes — agropoles, corridors, pôles",
   description:
     "Cinq modèles de programmes territoriaux structurants, finançables et mesurables : agropole, corridor économique, pôle de croissance, bassin de développement, portefeuille communal.",
-  alternates: { canonical: "/programmes" },
+  alternates: { canonical: "/programmes", languages: { fr: "/programmes", en: "/en/programmes" } },
 };
 
 export default function ProgrammesHub() {

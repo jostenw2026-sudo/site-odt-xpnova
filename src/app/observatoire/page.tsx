@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Observatoire territorial — données & cartes",
   description:
     "Eau, énergie, infrastructures, économie, agriculture, climat, gouvernance : indicateurs sourcés et comparaisons CEMAC des territoires d'Afrique centrale.",
-  alternates: { canonical: "/observatoire" },
+  alternates: { canonical: "/observatoire", languages: { fr: "/observatoire", en: "/en/observatoire" } },
 };
 
 export default function ObservatoireHub() {

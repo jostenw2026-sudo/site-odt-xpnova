@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Publications de l'Observatoire",
   description:
     "Notes stratégiques, baromètres territoriaux et cartographies commentées de l'Observatoire ODT.",
-  alternates: { canonical: "/observatoire/publications" },
+  alternates: { canonical: "/observatoire/publications", languages: { fr: "/observatoire/publications", en: "/en/observatoire/publications" } },
 };
 
 const LIGNES = [

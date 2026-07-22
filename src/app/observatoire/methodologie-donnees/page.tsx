@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Méthodologie des données",
   description:
     "Sources, millésimes et limites des indicateurs de l'Observatoire territorial ODT : notre doctrine — aucune donnée sans source ni date.",
-  alternates: { canonical: "/observatoire/methodologie-donnees" },
+  alternates: { canonical: "/observatoire/methodologie-donnees", languages: { fr: "/observatoire/methodologie-donnees", en: "/en/observatoire/methodologie-donnees" } },
 };
 
 export default function MethodologieDonnees() {

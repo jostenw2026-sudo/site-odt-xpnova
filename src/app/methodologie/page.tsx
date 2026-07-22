@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Méthodologie — le cycle territorial en 6 phases",
   description:
     "Du diagnostic à la mesure d'impact : le cycle territorial ODT en six phases, adossé à la méthode éprouvée de XP-NOVA. Chaque phase produit un livrable vérifiable.",
-  alternates: { canonical: "/methodologie" },
+  alternates: { canonical: "/methodologie", languages: { fr: "/methodologie", en: "/en/methodologie" } },
 };
 
 const PHASES = [

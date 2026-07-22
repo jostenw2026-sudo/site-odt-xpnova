@@ -1,5 +1,10 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Section, SectionTitle, Button } from "@/components/ui";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/", languages: { fr: "/", en: "/en" } },
+};
 import { StatsBar, StatutBadge, CTABanner } from "@/components/blocks";
 import { HeroTerritory, ObsIcon, ProgIcon } from "@/components/illustrations";
 import { StatCard } from "@/components/data";

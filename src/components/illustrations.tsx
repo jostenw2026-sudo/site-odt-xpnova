@@ -166,6 +166,7 @@ export function ProgIcon({ type, className = "" }: { type: string; className?: s
         </svg>
       );
     case "Corridor économique":
+    case "Economic corridor":
       return (
         <svg {...p}>
           <path d="M7 21L10 3M17 21L14 3" />
@@ -173,6 +174,7 @@ export function ProgIcon({ type, className = "" }: { type: string; className?: s
         </svg>
       );
     case "Pôle de croissance":
+    case "Growth pole":
       return (
         <svg {...p}>
           <path d="M2 8l10-4 10 4-10 4z" />
@@ -181,6 +183,7 @@ export function ProgIcon({ type, className = "" }: { type: string; className?: s
         </svg>
       );
     case "Bassin de développement":
+    case "Development basin":
       return (
         <svg {...p}>
           <path d="M3 7c3 0 3 2 6 2s3-2 6-2 3 2 6 2" />

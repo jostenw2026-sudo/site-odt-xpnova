@@ -2,35 +2,56 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { nav, site, cta } from "@/content/site";
+import { navEn, ctaEn, siteEn } from "@/content/en";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname() ?? "/";
+  const en = pathname === "/en" || pathname.startsWith("/en/");
+
+  const NAV = en ? navEn : nav;
+  const CTA = en ? ctaEn : cta;
+  const home = en ? "/en" : "/";
+  const fullName = en ? siteEn.fullName : site.fullName;
+  const ecosystem = en ? siteEn.ecosystem : site.ecosystem;
+  // Bascule de langue : conserve le chemin courant quand le miroir existe.
+  const switchTarget = en ? (pathname.replace(/^\/en\/?/, "/") || "/") : `/en${pathname === "/" ? "" : pathname}`;
+
   return (
     <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur border-b border-line">
-      {/* Barre écosystème — harmonisation groupe */}
       <div className="bg-navy text-white/90 text-sm">
         <div className="container-x flex items-center justify-between py-1.5">
           <span className="hidden sm:inline text-white/70">
-            Écosystème :{" "}
-            {site.ecosystem.map((e, i) => (
+            {en ? "Ecosystem:" : "Écosystème :"}{" "}
+            {ecosystem.map((e, i) => (
               <span key={e.key}>
                 <a href={e.url} className="text-gold hover:underline">
                   {e.name}
                 </a>
-                {i < site.ecosystem.length - 1 ? " · " : ""}
+                {i < ecosystem.length - 1 ? " · " : ""}
               </span>
             ))}
           </span>
-          <a href={`mailto:${site.email}`} className="ml-auto text-white/80 hover:text-white">
-            {site.email}
-          </a>
+          <span className="ml-auto flex items-center gap-4">
+            <a href={`mailto:${site.email}`} className="hidden text-white/80 hover:text-white sm:inline">
+              {site.email}
+            </a>
+            <Link
+              href={switchTarget}
+              className="rounded border border-white/30 px-2 py-0.5 text-xs font-bold text-white no-underline hover:border-gold hover:text-gold"
+              aria-label={en ? "Version française" : "English version"}
+            >
+              {en ? "FR" : "EN"}
+            </Link>
+          </span>
         </div>
       </div>
 
       <div className="container-x flex items-center justify-between py-3">
-        <Link href="/" className="flex items-center gap-3" aria-label="ODT — accueil">
+        <Link href={home} className="flex items-center gap-3" aria-label="ODT">
           <Image
             src="/brand/logo_xpnova_color.png"
             alt="XP-NOVA"
@@ -41,14 +62,12 @@ export default function Header() {
           />
           <span className="hidden border-l border-line pl-3 leading-tight md:block">
             <span className="block font-display text-lg font-extrabold text-teal">ODT</span>
-            <span className="block text-[10px] uppercase tracking-wide text-grey">
-              Opérateur de Développement Territorial
-            </span>
+            <span className="block text-[10px] uppercase tracking-wide text-grey">{fullName}</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Navigation principale">
-          {nav.map((n) => (
+        <nav className="hidden items-center gap-1 lg:flex" aria-label={en ? "Main navigation" : "Navigation principale"}>
+          {NAV.map((n) => (
             <Link
               key={n.href}
               href={n.href}
@@ -58,7 +77,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href={cta.primary.href}
+            href={CTA.primary.href}
             className="ml-2 rounded-md bg-gold px-4 py-2 text-sm font-semibold text-navy no-underline hover:bg-gold-soft"
           >
             Contact
@@ -80,7 +99,7 @@ export default function Header() {
       {open && (
         <nav className="border-t border-line bg-paper lg:hidden" aria-label="Navigation mobile">
           <div className="container-x flex flex-col py-2">
-            {nav.map((n) => (
+            {NAV.map((n) => (
               <Link
                 key={n.href}
                 href={n.href}
@@ -91,11 +110,11 @@ export default function Header() {
               </Link>
             ))}
             <Link
-              href={cta.primary.href}
+              href={CTA.primary.href}
               onClick={() => setOpen(false)}
               className="my-3 rounded-md bg-gold px-4 py-2.5 text-center font-semibold text-navy no-underline"
             >
-              {cta.primary.label}
+              {CTA.primary.label}
             </Link>
           </div>
         </nav>

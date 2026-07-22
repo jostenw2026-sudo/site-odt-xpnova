@@ -28,5 +28,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/odt/esg-inclusion", 0.6),
     stat("/ressources", 0.5),
     stat("/contact", 0.7),
+    // Miroir anglais
+    stat("/en", 0.9),
+    stat("/en/odt", 0.8),
+    stat("/en/programmes", 0.8),
+    ...programmes.map((p) => stat(`/en/programmes/${p.slug}`, 0.7)),
+    stat("/en/observatoire", 0.8),
+    ...observatoires.map((o) => stat(`/en/observatoire/${o.slug}`, 0.7)),
+    stat("/en/observatoire/publications", 0.5),
+    stat("/en/observatoire/methodologie-donnees", 0.4),
+    stat("/en/financement", 0.7),
+    stat("/en/methodologie", 0.7),
+    stat("/en/odt/gouvernance", 0.5),
+    stat("/en/odt/expertise-mobilisable", 0.7),
+    stat("/en/odt/esg-inclusion", 0.5),
+    stat("/en/ressources", 0.4),
+    stat("/en/contact", 0.6),
   ];
 }

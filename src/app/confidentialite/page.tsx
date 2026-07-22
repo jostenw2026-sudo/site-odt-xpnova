@@ -6,7 +6,7 @@ import { site } from "@/content/site";
 export const metadata: Metadata = {
   title: "Politique de confidentialité",
   description: "Politique de confidentialité et gestion des données personnelles de XP-NOVA.",
-  alternates: { canonical: "/confidentialite" },
+  alternates: { canonical: "/confidentialite", languages: { fr: "/confidentialite", en: "/en/confidentialite" } },
   robots: { index: false },
 };
 
