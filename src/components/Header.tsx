@@ -34,10 +34,10 @@ export default function Header() {
           <Image
             src="/brand/logo_xpnova_color.png"
             alt="XP-NOVA"
-            width={160}
-            height={37}
+            width={280}
+            height={64}
             priority
-            className="h-8 w-auto"
+            className="h-14 w-auto"
           />
           <span className="hidden border-l border-line pl-3 leading-tight md:block">
             <span className="block font-display text-lg font-extrabold text-teal">ODT</span>
