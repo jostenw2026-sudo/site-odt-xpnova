@@ -3,7 +3,7 @@
 /* ============================================================
    XP-NOVA — Bureau d'Ingénierie Conseil
    Design tokens — Annexe A du CDC V1.2
-   navy #0D1F5C · royal #00289A · gold #D4A017
+   teal pétrole #0E4C5A · royal pétrole #0B6E7A · accent cyan #0FA3B1 · gold #D4A017
    Playfair Display (titres) + Source Sans 3 (corps)
    ============================================================ */
 
@@ -21,8 +21,12 @@
 }
 
 @theme {
-  --color-navy: #0d1f5c;
-  --color-royal: #00289a;
+  /* Identité ODT : TEAL PÉTROLE (couleur distinctive de la branche
+     territoriale). --color-navy porte désormais le pétrole profond ;
+     --color-royal un pétrole moyen (liens) ; --color-teal reste l'accent
+     cyan « données/statuts ». XP-NOVA garde le navy, Agrovita le vert. */
+  --color-navy: #0e4c5a;
+  --color-royal: #0b6e7a;
   --color-gold: #d4a017;
   --color-gold-soft: #e9c25a;
   --color-teal: #0fa3b1; /* accent ODT — données, statuts, cartes */

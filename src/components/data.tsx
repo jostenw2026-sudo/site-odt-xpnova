@@ -148,7 +148,7 @@ export function TrendChart({ code, lang = "fr" }: { code: string; lang?: Lang })
         ))}
         <path d={path} fill="none" stroke="#0FA3B1" strokeWidth="2.5" strokeLinejoin="round" />
         <circle cx={X(last.year)} cy={Y(last.value)} r="4" fill="#0FA3B1" />
-        <text x={X(last.year) - 6} y={Y(last.value) - 8} textAnchor="end" fontSize="11" fontWeight="700" fill="#0D1F5C">
+        <text x={X(last.year) - 6} y={Y(last.value) - 8} textAnchor="end" fontSize="11" fontWeight="700" fill="#0e4c5a">
           {fmt(last.value, ind.unit, lang)} %
         </text>
       </svg>
