@@ -17,7 +17,7 @@ export default function RessourcesPage() {
       <PageHero
         eyebrow="Ressources"
         title="Centre de ressources"
-        lead="Documents publics et accès sur demande — chaque ressource indique son statut réel de disponibilité."
+        lead="Nos documents sont transmis sur demande : inscrivez-vous, votre demande est validée, puis le document vous est envoyé — une procédure qui nous permet de savoir à qui nous nous adressons."
       />
       <Breadcrumbs items={[{ label: "Ressources" }]} />
       <Section>
