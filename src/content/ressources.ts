@@ -20,9 +20,8 @@ export const ressources: Ressource[] = [
     key: "note-presentation",
     title: "Note de présentation ODT",
     desc: "Le modèle d'opérateur, les programmes et l'Observatoire en 4 pages — format partenaires institutionnels.",
-    mode: "download",
-    file: "odt-note-presentation.pdf",
-    badge: "Télécharger (PDF)",
+    mode: "request",
+    badge: "Sur demande",
   },
   {
     key: "publications",
@@ -53,9 +52,8 @@ export const ressourcesEn: Ressource[] = [
     key: "note-presentation",
     title: "ODT presentation note",
     desc: "The operator model, the programmes and the Observatory in 4 pages — institutional partner format.",
-    mode: "download",
-    file: "odt-note-presentation.pdf",
-    badge: "Download (PDF)",
+    mode: "request",
+    badge: "On request",
   },
   {
     key: "publications",
