@@ -36,11 +36,11 @@ export const ressources: Ressource[] = [
   },
   {
     key: "fiches-references",
-    title: "Fiches de références détaillées",
-    desc: "Les 9 fiches GEQUIPS au format bailleur (périodes, valeurs, effectifs, clients).",
+    title: "Fiche de référence INNOVA",
+    desc: "Les projets réalisés par INNOVA (sous-traitant de GEQUIPS depuis 2007) : conception graphique/CAO des lots, métrologie et GED.",
     mode: "request",
     badge: "Sur demande motivée",
-    file: "fiches-references-gequips.pdf",
+    file: "fiche-reference-innova.pdf",
   },
   {
     key: "documents-institutionnels",
@@ -71,11 +71,11 @@ export const ressourcesEn: Ressource[] = [
   },
   {
     key: "fiches-references",
-    title: "Detailed reference sheets",
-    desc: "The 9 GEQUIPS sheets in donor format (periods, values, staffing, clients).",
+    title: "INNOVA reference sheet",
+    desc: "Projects delivered by INNOVA (GEQUIPS subcontractor since 2007): graphic/CAD design of the technical packages, metrology and EDM.",
     mode: "request",
     badge: "On justified request",
-    file: "fiches-references-gequips.pdf",
+    file: "fiche-reference-innova.pdf",
   },
   {
     key: "documents-institutionnels",
