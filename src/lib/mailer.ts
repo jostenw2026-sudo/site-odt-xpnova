@@ -93,3 +93,26 @@ export async function sendLeadDownloadEmail(to: string, docTitre: string, downlo
     <p style="color:#667085;font-size:12px">Si le bouton ne fonctionne pas, copiez ce lien dans votre navigateur :<br/>${downloadUrl}</p>`),
   });
 }
+
+/** Vérifie la connexion + l'authentification SMTP sans envoyer d'e-mail. */
+export async function verifyTransport(): Promise<{ ok: boolean; error?: string }> {
+  if (!smtpConfigured()) return { ok: false, error: "SMTP non configuré (SMTP_HOST / SMTP_USER / SMTP_PASSWORD)." };
+  try {
+    await transport().verify();
+    return { ok: true };
+  } catch (err) {
+    cached = null;
+    return { ok: false, error: (err as Error).message };
+  }
+}
+
+/** Envoie un e-mail de test au destinataire des notifications (diagnostic). */
+export async function sendTestEmail(): Promise<void> {
+  const from = process.env.SMTP_FROM ?? process.env.SMTP_USER!;
+  await transport().sendMail({
+    from: `ODT · XP-NOVA <${from}>`,
+    to: notifyRecipient(),
+    subject: "[TEST] Diagnostic SMTP — ODT",
+    text: "E-mail de test de diagnostic ODT. Si vous le recevez, le SMTP fonctionne de bout en bout.",
+  });
+}
