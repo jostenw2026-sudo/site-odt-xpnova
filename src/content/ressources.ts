@@ -37,7 +37,7 @@ export const ressources: Ressource[] = [
   {
     key: "fiches-references",
     title: "Fiche de référence INNOVA",
-    desc: "Les projets réalisés par INNOVA (sous-traitant de GEQUIPS depuis 2007) : conception graphique/CAO des lots, métrologie et GED.",
+    desc: "Les projets réalisés par INNOVA (sous-traitant de GEQUIPS depuis 2007) : ingénierie économique & métré, CAO et GED.",
     mode: "request",
     badge: "Sur demande motivée",
     file: "fiche-reference-innova.pdf",
@@ -72,7 +72,7 @@ export const ressourcesEn: Ressource[] = [
   {
     key: "fiches-references",
     title: "INNOVA reference sheet",
-    desc: "Projects delivered by INNOVA (GEQUIPS subcontractor since 2007): graphic/CAD design of the technical packages, metrology and EDM.",
+    desc: "Projects delivered by INNOVA (GEQUIPS subcontractor since 2007): economic engineering & quantity surveying, CAD and EDM.",
     mode: "request",
     badge: "On justified request",
     file: "fiche-reference-innova.pdf",
