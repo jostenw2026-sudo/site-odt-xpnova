@@ -7,9 +7,11 @@ import { useState } from "react";
 
 export default function RessourceRequestForm({
   document,
+  documentKey,
   lang = "fr",
 }: {
   document: string;
+  documentKey?: string;
   lang?: "fr" | "en";
 }) {
   const en = lang === "en";
@@ -24,7 +26,7 @@ export default function RessourceRequestForm({
       const res = await fetch("/api/ressources", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...data, document }),
+        body: JSON.stringify({ ...data, document, documentKey }),
       });
       if (!res.ok) throw new Error();
       setStatus("ok");

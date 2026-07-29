@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
 import { odooConfigured, odooCreate } from "@/lib/odoo";
+import { ressources } from "@/content/ressources";
+import { smtpConfigured, sendValidationRequestEmail } from "@/lib/mailer";
+import { signValidationToken, siteUrl } from "@/lib/ressources-tokens";
 
 // Demande d'un document "sur demande" -> CRM Odoo (crm.lead), source-taggé.
-// Même logique non bloquante que /api/contact : si Odoo est indisponible ou non
-// configuré, la demande est tracée en log (le visiteur n'est jamais bloqué).
+// Pour un document `request` disposant d'un PDF privé (`file`), on envoie en
+// plus une demande de validation au propriétaire : après son clic, le lien de
+// téléchargement sécurisé part au demandeur. Non bloquant.
 
 const SOURCE = "odt.xp-nova.com — ressources";
 
@@ -11,10 +15,7 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // Honeypot anti-spam
-    if (body.website) {
-      return NextResponse.json({ ok: true });
-    }
+    if (body.website) return NextResponse.json({ ok: true }); // honeypot
 
     const required = ["nom", "email", "pays", "document"];
     for (const f of required) {
@@ -52,11 +53,32 @@ export async function POST(req: Request) {
       }
     } else {
       console.warn("[ressources ODT] Odoo non configuré — demande en log :", {
-        nom: val("nom"),
-        email: val("email"),
-        pays: val("pays"),
-        document: val("document"),
+        nom: val("nom"), email: val("email"), pays: val("pays"), document: val("document"),
       });
+    }
+
+    // Livraison sécurisée : demande de validation au propriétaire (si doc privé).
+    const key = val("documentKey");
+    const doc =
+      (key && ressources.find((r) => r.key === key)) ||
+      ressources.find((r) => r.title === val("document"));
+    if (doc && doc.mode === "request" && doc.file && smtpConfigured()) {
+      try {
+        const token = await signValidationToken({
+          key: doc.key,
+          email: val("email"),
+          nom: val("nom") || undefined,
+          organisation: val("organisation") || undefined,
+        });
+        const validateUrl = `${siteUrl()}/api/ressources/validate?t=${encodeURIComponent(token)}`;
+        await sendValidationRequestEmail(
+          { email: val("email"), nom: val("nom") || undefined, organisation: val("organisation") || undefined, pays: val("pays") || undefined, motif: val("motif") || undefined },
+          doc.title,
+          validateUrl,
+        );
+      } catch (err) {
+        console.warn(`[ressources ODT] demande de validation échouée : ${(err as Error).message}`);
+      }
     }
 
     return NextResponse.json({ ok: true });

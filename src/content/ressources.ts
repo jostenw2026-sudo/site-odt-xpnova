@@ -1,7 +1,9 @@
 // Ressources ODT — matrice téléchargement / lien interne / demande motivée.
-// mode "download" : PDF dans /public/ressources/<file>
+// mode "download" : PDF public dans /public/ressources/<file>
 // mode "link"     : renvoi vers une page interne (ex. Publications de l'Observatoire)
-// mode "request"  : formulaire de demande -> lead Odoo (aucun fichier exposé)
+// mode "request"  : formulaire de demande -> lead Odoo, puis (si `file` défini)
+//                   livraison sécurisée du PDF privé après validation du propriétaire.
+//   Le PDF d'un doc "request" vit dans private/ressources/<file> (jamais public).
 
 export type RessourceMode = "download" | "link" | "request";
 
@@ -22,6 +24,7 @@ export const ressources: Ressource[] = [
     desc: "Le modèle d'opérateur, les programmes et l'Observatoire en 4 pages — format partenaires institutionnels.",
     mode: "request",
     badge: "Sur demande",
+    file: "note-presentation-odt.pdf",
   },
   {
     key: "publications",
@@ -37,6 +40,7 @@ export const ressources: Ressource[] = [
     desc: "Les 9 fiches GEQUIPS au format bailleur (périodes, valeurs, effectifs, clients).",
     mode: "request",
     badge: "Sur demande motivée",
+    file: "fiches-references-gequips.pdf",
   },
   {
     key: "documents-institutionnels",
@@ -44,6 +48,7 @@ export const ressources: Ressource[] = [
     desc: "RCCM, NIU, statuts, attestations — dossier administratif du groupe.",
     mode: "request",
     badge: "Sur demande motivée",
+    file: "dossier-institutionnel.pdf",
   },
 ];
 
@@ -54,6 +59,7 @@ export const ressourcesEn: Ressource[] = [
     desc: "The operator model, the programmes and the Observatory in 4 pages — institutional partner format.",
     mode: "request",
     badge: "On request",
+    file: "note-presentation-odt.pdf",
   },
   {
     key: "publications",
@@ -69,6 +75,7 @@ export const ressourcesEn: Ressource[] = [
     desc: "The 9 GEQUIPS sheets in donor format (periods, values, staffing, clients).",
     mode: "request",
     badge: "On justified request",
+    file: "fiches-references-gequips.pdf",
   },
   {
     key: "documents-institutionnels",
@@ -76,5 +83,6 @@ export const ressourcesEn: Ressource[] = [
     desc: "Trade registry, tax ID, articles of association, certificates — the group's administrative file.",
     mode: "request",
     badge: "On justified request",
+    file: "dossier-institutionnel.pdf",
   },
 ];

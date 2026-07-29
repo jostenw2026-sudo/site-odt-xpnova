@@ -43,7 +43,7 @@ export default function RessourceItem({ r, lang = "fr" }: { r: Ressource; lang?:
             {r.badge} — {requestLabel}
           </button>
         ) : (
-          <RessourceRequestForm document={r.title} lang={lang} />
+          <RessourceRequestForm document={r.title} documentKey={r.key} lang={lang} />
         )}
       </div>
     </div>

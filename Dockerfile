@@ -18,6 +18,8 @@ RUN addgroup -g 1001 -S nodejs && adduser -S nextjs -u 1001
 COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+# Documents « sur demande » (PDF privés) servis par route protégée après validation.
+COPY --from=builder --chown=nextjs:nodejs /app/private ./private
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]
