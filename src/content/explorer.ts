@@ -1,7 +1,7 @@
 // Explorer — Cartographie institutionnelle de l'ODT (note stratégique
 // XPN-NSTR-ODT-ACT-2026-003) : les 12 domaines structurants du développement
 // territorial, les 7 familles d'acteurs, l'ingénierie de convergence (visa
-// technique + escrow OHADA) et le parcours contractuel canonique.
+// technique + sécurisation des décaissements) et le parcours contractuel canonique.
 // Bilingue (fr/en) — mêmes slugs FR pour préserver la bascule de langue.
 
 export interface Domaine {
@@ -44,8 +44,8 @@ export interface ExplorerContent {
   convergenceEyebrow: string;
   convergenceTitle: string;
   convergenceIntro: string;
-  escrowLabel: string;
-  escrow: string;
+  securisationLabel: string;
+  securisation: string;
   parcoursEyebrow: string;
   parcoursTitle: string;
   parcoursIntro: string;
@@ -291,7 +291,7 @@ const famillesFr: Famille[] = [
     title: "Partenaires techniques et financiers (PTF)",
     entites: "UE, AFD, Banque Mondiale, BAD, Système des Nations Unies, Expertise France.",
     intermediation:
-      "Structuration de dossiers bancables, audits ESG/RDUE et conventions de comptes séquestres (Escrow OHADA).",
+      "Structuration de dossiers bancables, audits ESG/RDUE et sécurisation des décaissements conditionnés au visa technique.",
     analyse: [
       { titre: "Bailleurs multilatéraux & bilatéraux", desc: "Union Européenne (UE), Agence Française de Développement (AFD), Banque Mondiale, Banque Africaine de Développement (BAD)." },
       { titre: "Agences spécialisées & Nations Unies", desc: "Expertise France, agences du système des Nations Unies (PNUD, FAO, ONU-Habitat) apportant assistance technique et plateformes d'appui." },
@@ -388,9 +388,9 @@ const fr: ExplorerContent = {
   convergenceTitle: "Faire converger domaines et acteurs",
   convergenceIntro:
     "L'efficacité de l'ODT repose sur sa capacité à faire converger la matrice des 12 domaines sectoriels et la taxonomie des 7 familles d'acteurs. Un projet d'aménagement hydroagricole (domaine 3) intègre systématiquement le désenclavement routier (domaine 2), l'énergie solaire (domaine 5), l'audit environnemental RDUE (domaine 6) et la formation des coopératives locales (domaine 7) — au sein d'un dossier unique.",
-  escrowLabel: "Sécurisation par Escrow OHADA & visa technique",
-  escrow:
-    "Les ressources mobilisées par les bailleurs (famille 3) ou l'État (famille 1) au profit des CTD (famille 2) et des entreprises privées (famille 5) sont sanctuarisées sur un compte séquestre de droit OHADA. Aucun décaissement n'intervient sans la délivrance préalable d'un visa technique signé par les ingénieurs de XP-NOVA, certifiant la qualité et l'atteinte effective des jalons de chantier.",
+  securisationLabel: "Sécurisation des décaissements par visa technique",
+  securisation:
+    "Les ressources mobilisées par les bailleurs (famille 3) ou l'État (famille 1) au profit des CTD (famille 2) et des entreprises privées (famille 5) sont placées sur un compte dédié et sécurisé, et libérées par tranches. Aucun décaissement n'intervient sans la délivrance préalable d'un visa technique signé par les ingénieurs de XP-NOVA, certifiant la qualité et l'atteinte effective des jalons de chantier.",
   parcoursEyebrow: "Parcours contractuel canonique",
   parcoursTitle: "De l'idée au chantier sécurisé",
   parcoursIntro:
@@ -627,7 +627,7 @@ const famillesEn: Famille[] = [
     title: "Technical and financial partners (TFP)",
     entites: "EU, AFD, World Bank, AfDB, United Nations system, Expertise France.",
     intermediation:
-      "Structuring of bankable dossiers, ESG/EUDR audits and OHADA escrow account agreements.",
+      "Structuring of bankable dossiers, ESG/EUDR audits and securing of disbursements conditioned on the technical sign-off.",
     analyse: [
       { titre: "Multilateral & bilateral donors", desc: "European Union (EU), French Development Agency (AFD), World Bank, African Development Bank (AfDB)." },
       { titre: "Specialised agencies & United Nations", desc: "Expertise France, UN system agencies (UNDP, FAO, UN-Habitat) providing technical assistance and support platforms." },
@@ -724,9 +724,9 @@ const en: ExplorerContent = {
   convergenceTitle: "Making domains and actors converge",
   convergenceIntro:
     "ODT's effectiveness rests on its ability to converge the matrix of 12 sectoral domains and the taxonomy of 7 families of actors. A hydro-agricultural development project (domain 3) systematically integrates road access (domain 2), solar energy (domain 5), the EUDR environmental audit (domain 6) and training of local cooperatives (domain 7) — within a single dossier.",
-  escrowLabel: "Securing via OHADA Escrow & technical sign-off",
-  escrow:
-    "Resources mobilised by donors (family 3) or the State (family 1) for local governments (family 2) and private firms (family 5) are ring-fenced in an OHADA-law escrow account. No disbursement occurs without the prior delivery of a technical sign-off signed by XP-NOVA engineers, certifying quality and the effective achievement of construction milestones.",
+  securisationLabel: "Securing disbursements through technical sign-off",
+  securisation:
+    "Resources mobilised by donors (family 3) or the State (family 1) for local governments (family 2) and private firms (family 5) are placed in a dedicated, secured account and released in tranches. No disbursement occurs without the prior delivery of a technical sign-off signed by XP-NOVA engineers, certifying quality and the effective achievement of construction milestones.",
   parcoursEyebrow: "Canonical contractual path",
   parcoursTitle: "From idea to secured works",
   parcoursIntro:

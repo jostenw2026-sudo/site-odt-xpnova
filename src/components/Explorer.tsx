@@ -7,7 +7,7 @@ import { ctaEn } from "@/content/en";
 
 // Hub « Explorer » — cartographie territoriale de l'ODT : positionnement,
 // 12 domaines structurants, 7 familles d'acteurs, ingénierie de convergence
-// (escrow OHADA + visa technique) et parcours contractuel. Bilingue (fr/en).
+// (visa technique + sécurisation des décaissements) et parcours contractuel. Bilingue (fr/en).
 
 export default function Explorer({ lang = "fr" }: { lang?: Lang }) {
   const c = getExplorer(lang);
@@ -85,8 +85,8 @@ export default function Explorer({ lang = "fr" }: { lang?: Lang }) {
       <Section tone="light" id="convergence">
         <SectionTitle eyebrow={c.convergenceEyebrow} title={c.convergenceTitle} intro={c.convergenceIntro} />
         <div className="rounded-lg border-l-4 border-teal bg-paper p-6 shadow-sm">
-          <p className="eyebrow text-teal">{c.escrowLabel}</p>
-          <p className="mt-3 text-ink/90">{c.escrow}</p>
+          <p className="eyebrow text-teal">{c.securisationLabel}</p>
+          <p className="mt-3 text-ink/90">{c.securisation}</p>
         </div>
       </Section>
 

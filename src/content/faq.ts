@@ -69,8 +69,8 @@ const fr: FaqContent = {
           a: "C'est le document signé par les ingénieurs de XP-NOVA qui certifie la qualité et l'atteinte effective des jalons d'un chantier. Aucun décaissement des fonds sanctuarisés n'intervient sans ce visa préalable : il protège le maître d'ouvrage et le bailleur.",
         },
         {
-          q: "Comment les fonds sont-ils sécurisés (escrow OHADA) ?",
-          a: "Les ressources mobilisées par les bailleurs ou l'État au profit des collectivités et des entreprises sont placées sur un compte séquestre de droit OHADA. Les décaissements sont conditionnés au visa technique attestant des jalons atteints — d'où une traçabilité et une redevabilité complètes.",
+          q: "Comment les fonds sont-ils sécurisés ?",
+          a: "Les ressources mobilisées par les bailleurs ou l'État au profit des collectivités et des entreprises sont placées sur un compte dédié et sécurisé. Les décaissements y sont libérés par tranches, uniquement contre un visa technique attestant des jalons atteints — d'où une traçabilité et une redevabilité complètes.",
         },
         {
           q: "Comment garantissez-vous la transparence ?",
@@ -142,8 +142,8 @@ const en: FaqContent = {
           a: "It is the document signed by XP-NOVA engineers certifying quality and the effective achievement of a project's milestones. No disbursement of the ring-fenced funds occurs without this prior sign-off: it protects both the contracting authority and the donor.",
         },
         {
-          q: "How are funds secured (OHADA escrow)?",
-          a: "Resources mobilised by donors or the State for local governments and firms are placed in an OHADA-law escrow account. Disbursements are conditioned on the technical sign-off attesting to milestones reached — ensuring full traceability and accountability.",
+          q: "How are funds secured?",
+          a: "Resources mobilised by donors or the State for local governments and firms are placed in a dedicated, secured account. Disbursements are released in tranches, only against a technical sign-off attesting to milestones reached — ensuring full traceability and accountability.",
         },
         {
           q: "How do you guarantee transparency?",
