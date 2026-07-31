@@ -32,6 +32,7 @@ export const navEn = [
   { label: "Financing", href: "/en/financement" },
   { label: "Methodology", href: "/en/methodologie" },
   { label: "Resources", href: "/en/ressources" },
+  { label: "Careers", href: "/en/carrieres" },
 ] as const;
 
 export const ctaEn = {

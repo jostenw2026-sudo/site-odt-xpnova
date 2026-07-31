@@ -50,6 +50,7 @@ export const nav = [
   { label: "Financement", href: "/financement" },
   { label: "Méthodologie", href: "/methodologie" },
   { label: "Ressources", href: "/ressources" },
+  { label: "Carrières", href: "/carrieres" },
 ] as const;
 
 export const cta = {
