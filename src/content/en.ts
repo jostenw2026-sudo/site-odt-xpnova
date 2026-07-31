@@ -28,7 +28,7 @@ export const siteEn = {
 export const navEn = [
   { label: "About ODT", href: "/en/odt" },
   { label: "Explore", href: "/en/explorer" },
-  { label: "Territories & Programmes", href: "/en/programmes" },
+  { label: "Programmes", href: "/en/programmes" },
   { label: "Observatory", href: "/en/observatoire" },
   { label: "Financing", href: "/en/financement" },
   { label: "Methodology", href: "/en/methodologie" },

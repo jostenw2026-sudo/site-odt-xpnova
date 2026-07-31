@@ -58,20 +58,20 @@ export default function Header() {
             width={280}
             height={64}
             priority
-            className="h-14 w-auto"
+            className="h-12 w-auto"
           />
           <span className="hidden border-l border-line pl-3 leading-tight md:block">
             <span className="block font-display text-lg font-extrabold text-teal">ODT</span>
-            <span className="block text-[10px] uppercase tracking-wide text-grey">{fullName}</span>
+            <span className="hidden text-[10px] uppercase tracking-wide text-grey 2xl:block">{fullName}</span>
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label={en ? "Main navigation" : "Navigation principale"}>
+        <nav className="hidden items-center gap-0.5 xl:flex" aria-label={en ? "Main navigation" : "Navigation principale"}>
           {NAV.map((n) => (
             <Link
               key={n.href}
               href={n.href}
-              className="rounded-md px-3 py-2 text-sm font-semibold text-navy no-underline hover:bg-light"
+              className="whitespace-nowrap rounded-md px-2 py-2 text-sm font-semibold text-navy no-underline hover:bg-light"
             >
               {n.label}
             </Link>
@@ -85,7 +85,7 @@ export default function Header() {
         </nav>
 
         <button
-          className="lg:hidden rounded-md border border-line p-2"
+          className="xl:hidden rounded-md border border-line p-2"
           aria-expanded={open}
           aria-label="Menu"
           onClick={() => setOpen(!open)}
@@ -97,7 +97,7 @@ export default function Header() {
       </div>
 
       {open && (
-        <nav className="border-t border-line bg-paper lg:hidden" aria-label="Navigation mobile">
+        <nav className="border-t border-line bg-paper xl:hidden" aria-label="Navigation mobile">
           <div className="container-x flex flex-col py-2">
             {NAV.map((n) => (
               <Link

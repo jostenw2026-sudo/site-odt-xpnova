@@ -57,7 +57,16 @@ export default function ContactForm({ lang = "fr" }: { lang?: "fr" | "en" }) {
     select: en ? "Select…" : "Sélectionner…",
     send: en ? "Send my request" : "Envoyer ma demande",
     sending: en ? "Sending…" : "Envoi…",
-    error: en ? "An error occurred. Write to us directly at contact@xp-nova.com." : "{L.error}",
+    error: en
+      ? "An error occurred. Write to us directly at contact@xp-nova.com."
+      : "Une erreur est survenue. Écrivez-nous directement à contact@xp-nova.com.",
+    docs: en ? "Documents" : "Documents",
+    docsOpt: en ? "(optional)" : "(optionnel)",
+    docsHelp: en
+      ? "Note, ToR, plan, budget… PDF, Word, Excel or images · up to 6 files · 5 MB each, 15 MB total."
+      : "Note, TDR, plan, budget… PDF, Word, Excel ou images · jusqu'à 6 fichiers · 5 Mo chacun, 15 Mo au total.",
+    tooMany: en ? "Too many files (max 6)." : "Trop de fichiers (max 6).",
+    tooBig: en ? "Attachments are too large (15 MB total maximum)." : "Pièces jointes trop volumineuses (15 Mo au total maximum).",
     okTitle: en ? "Request received" : "Demande reçue",
     okText: en ? "Thank you. The ODT team will reply within 48 working hours to the address provided." : "Merci. L'équipe ODT vous répond sous 48 h ouvrées à l'adresse indiquée.",
     rgpd: en
@@ -67,18 +76,27 @@ export default function ContactForm({ lang = "fr" }: { lang?: "fr" | "en" }) {
   const OT = en ? EN.orgTypes : orgTypes;
   const OB = en ? EN.objets : objets;
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+  const [errMsg, setErrMsg] = useState("");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
+    setErrMsg("");
     const form = e.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    const fd = new FormData(form);
+    const files = fd.getAll("documents").filter((f): f is File => f instanceof File && f.size > 0);
+    if (files.length > 6) {
+      setErrMsg(L.tooMany);
+      setStatus("error");
+      return;
+    }
+    if (files.reduce((s, f) => s + f.size, 0) > 15 * 1024 * 1024) {
+      setErrMsg(L.tooBig);
+      setStatus("error");
+      return;
+    }
+    setStatus("sending");
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+      const res = await fetch("/api/contact", { method: "POST", body: fd });
       if (!res.ok) throw new Error();
       setStatus("ok");
       form.reset();
@@ -154,6 +172,21 @@ export default function ContactForm({ lang = "fr" }: { lang?: "fr" | "en" }) {
         <textarea id="message" name="message" required rows={5} className={field} />
       </div>
 
+      <div className="sm:col-span-2">
+        <label className={label} htmlFor="documents">
+          {L.docs} <span className="font-normal text-grey">{L.docsOpt}</span>
+        </label>
+        <input
+          id="documents"
+          name="documents"
+          type="file"
+          multiple
+          accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,image/jpeg,image/png"
+          className="w-full rounded-md border border-line bg-paper px-4 py-3 text-ink file:mr-3 file:rounded-md file:border-0 file:bg-navy file:px-4 file:py-2 file:font-semibold file:text-white hover:file:bg-royal"
+        />
+        <p className="mt-1 text-xs text-grey">{L.docsHelp}</p>
+      </div>
+
       <div className="flex items-center gap-4 sm:col-span-2">
         <button
           type="submit"
@@ -164,7 +197,7 @@ export default function ContactForm({ lang = "fr" }: { lang?: "fr" | "en" }) {
         </button>
         {status === "error" && (
           <p className="text-sm text-red-600">
-            {L.error}
+            {errMsg || L.error}
           </p>
         )}
       </div>

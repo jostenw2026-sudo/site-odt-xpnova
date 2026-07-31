@@ -46,7 +46,7 @@ export const site = {
 export const nav = [
   { label: "L'ODT", href: "/odt" },
   { label: "Explorer", href: "/explorer" },
-  { label: "Territoires & Programmes", href: "/programmes" },
+  { label: "Programmes", href: "/programmes" },
   { label: "Observatoire", href: "/observatoire" },
   { label: "Financement", href: "/financement" },
   { label: "Méthodologie", href: "/methodologie" },
