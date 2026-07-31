@@ -152,7 +152,7 @@ export const fichesGequips: FicheGequips[] = [
 export const promoteur = {
   nom: "Josten Magloire Wandji",
   titre: "Ingénieur électromécanicien (ENSP Yaoundé), gérant statutaire de XP-NOVA SARL",
-  onige: "Ordre National des Ingénieurs de Génie Électrique — matricule A001703",
+  onige: "Membre de l'Ordre National des Ingénieurs de Génie Électrique (ONIGE)",
   reperes: [
     { periode: "1989 – 1999", texte: "Chargé d'études à la DGTC (Direction Générale des Grands Travaux du Cameroun) : suivi technico-financier d'équipements publics — dont l'adduction d'eau de la ville de Yaoundé (captage du Nyong, réseau, châteaux d'eau) et des immeubles ministériels IGH." },
     { periode: "1999 – aujourd'hui", texte: "Directeur de projet GEQUIPS : maîtrise d'œuvre des lots technologiques de grands équipements — aéroports (Malabo, Ouagadougou-Donsin, Nsimalen, Douala, Bangui), stades, campus, sièges institutionnels, réseaux urbains (Mongomeyen, Guinée équatoriale)." },
@@ -161,4 +161,21 @@ export const promoteur = {
     { periode: "2005 · 2010", texte: "Audits de programmes publics au Gabon : Budget d'Investissement Public (4 provinces) et appui à l'audit du Trésor." },
   ],
   pays: ["Cameroun", "Burkina Faso", "Gabon", "Guinée équatoriale", "RCA", "Congo"],
+};
+
+/**
+ * Résumé agrégé (public) des références GEQUIPS — sert la vitrine de crédibilité
+ * SANS exposer clients, valeurs FCFA ni effectifs (détails « sur demande »).
+ * Source unique : fichesGequips. Comptes neutres en langue.
+ */
+export const refSummary = {
+  total: fichesGequips.length,
+  pays: Array.from(new Set(fichesGequips.map((f) => f.pays))).length,
+  parSecteur: fichesGequips.reduce<Record<FicheGequips["secteur"], number>>(
+    (acc, f) => {
+      acc[f.secteur] = (acc[f.secteur] ?? 0) + 1;
+      return acc;
+    },
+    {} as Record<FicheGequips["secteur"], number>,
+  ),
 };

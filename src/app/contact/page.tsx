@@ -20,7 +20,7 @@ export default function ContactPage() {
         lead="La prise de contact est libre et sans engagement. Premier retour sous 48 h ouvrées par un interlocuteur identifié."
       />
       <Breadcrumbs items={[{ label: "Contact" }]} />
-      <Section>
+      <Section id="contact-form">
         <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
           <ContactForm />
           <aside className="space-y-4">

@@ -385,7 +385,7 @@ export const fichesEn: {
 export const promoteurEn = {
   nom: "Josten Magloire Wandji",
   titre: "Electromechanical engineer (ENSP Yaoundé), statutory manager of XP-NOVA SARL",
-  onige: "National Order of Electrical Engineers (ONIGE) — registration A001703",
+  onige: "Member of the National Order of Electrical Engineers (ONIGE)",
   reperes: [
     { periode: "1989–1999", texte: "Project officer at the DGTC (Cameroon's Directorate-General of Major Works): technical and financial supervision of public facilities — including the Yaoundé city water supply (Nyong intake, network, water towers) and high-rise ministerial buildings." },
     { periode: "1999–today", texte: "Project director at GEQUIPS: design supervision of the technology packages of major facilities — airports (Malabo, Ouagadougou-Donsin, Nsimalen, Douala, Bangui), stadiums, campuses, institutional headquarters, urban networks (Mongomeyen, Equatorial Guinea)." },

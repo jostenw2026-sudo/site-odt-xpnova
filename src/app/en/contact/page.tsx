@@ -21,7 +21,7 @@ export default function ContactPageEn() {
         lead="Getting in touch is free and without commitment. First response within 48 working hours from an identified contact person."
       />
       <Breadcrumbs items={[{ label: "Contact" }]} lang="en" />
-      <Section>
+      <Section id="contact-form">
         <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
           <ContactForm lang="en" />
           <aside className="space-y-4">

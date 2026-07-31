@@ -1,19 +1,43 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Section, SectionTitle, Callout } from "@/components/ui";
 import { PageHero, Breadcrumbs, CTABanner } from "@/components/blocks";
-import { fichesEn, promoteurEn, CADRE_GEQUIPS_EN } from "@/content/en";
+import { refSummary } from "@/content/references";
+import { promoteurEn, CADRE_GEQUIPS_EN } from "@/content/en";
 
 export const metadata: Metadata = {
-  title: "Mobilisable expertise — documented references",
+  title: "Mobilisable expertise — engineering capacities",
   description:
-    "37 years of engineering of major public facilities (airports, stadiums, campuses, water, energy) across 6 countries — capacities mobilisable for territorial programmes.",
+    "37 years of engineering of major public facilities (airports, stadiums, campuses, buildings) across several countries — a summary of mobilisable capacities. Detailed references and CVs on request.",
   alternates: {
     canonical: "/en/odt/expertise-mobilisable",
     languages: { fr: "/odt/expertise-mobilisable", en: "/en/odt/expertise-mobilisable" },
   },
 };
 
+const SECTEURS_EN: Record<string, string> = {
+  aeroport: "Airports",
+  stade: "Stadiums & sports complexes",
+  campus: "Campuses & education facilities",
+  batiment: "Buildings & high-rises",
+  eau: "Water & networks",
+  energie: "Energy",
+};
+
+const dossierHref =
+  "/en/contact?objet=" +
+  encodeURIComponent("Request the reference dossier (assignments & detailed CVs)") +
+  "#contact-form";
+
 export default function ExpertisePageEn() {
+  const secteurs = Object.entries(refSummary.parSecteur);
+  const tiles = [
+    { num: String(refSummary.total), label: "documented assignments" },
+    { num: String(refSummary.pays), label: "countries of operation" },
+    { num: "37", label: "years of engineering" },
+    { num: String(secteurs.length), label: "facility families" },
+  ];
+
   return (
     <>
       <PageHero
@@ -42,47 +66,62 @@ export default function ExpertisePageEn() {
 
       <Section tone="light">
         <SectionTitle
-          eyebrow="GEQUIPS references"
-          title="Nine assignments documented in donor format"
-          intro="Extracted from the official reference sheets of GEQUIPS SARL (a shareholder of XP-NOVA): verifiable periods, service values, staffing and clients."
+          eyebrow="References — summary"
+          title="A documented engineering capacity"
+          intro="Our credibility rests on assignments actually delivered on major public facilities. We present the summary here: the detail (clients, service values, staffing and CVs) is shared on request, with qualified partners."
         />
-        <div className="grid gap-5 md:grid-cols-2">
-          {fichesEn.map((f) => (
-            <article key={f.slug} className="flex flex-col rounded-lg border border-line bg-paper p-6">
-              <div className="flex items-start justify-between gap-3">
-                <h3 className="title-3 text-navy">{f.projet}</h3>
-                <span className="shrink-0 rounded bg-teal-soft px-2.5 py-1 text-xs font-bold uppercase text-navy">
-                  {f.pays}
-                </span>
-              </div>
-              <p className="mt-2 text-sm font-semibold text-gold">{f.mission}</p>
-              <p className="mt-2 flex-1 text-sm text-grey">{f.descriptif}</p>
-              <dl className="mt-4 grid grid-cols-3 gap-2 border-t border-line pt-3 text-sm">
-                <div>
-                  <dt className="text-xs text-grey">Period</dt>
-                  <dd className="font-semibold text-ink">{f.periode}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-grey">Services</dt>
-                  <dd className="font-semibold text-ink">{f.valeurServices}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs text-grey">Team</dt>
-                  <dd className="font-semibold text-ink">{f.effectif} experts</dd>
-                </div>
-              </dl>
-              <p className="mt-2 text-xs text-grey">Client: {f.client}</p>
-            </article>
+        <div className="grid grid-cols-2 gap-5 md:grid-cols-4">
+          {tiles.map((t) => (
+            <div key={t.label} className="rounded-lg border border-line bg-paper p-6 text-center">
+              <div className="font-display text-4xl font-extrabold text-teal">{t.num}</div>
+              <div className="mt-1 text-sm text-grey">{t.label}</div>
+            </div>
           ))}
         </div>
+
+        <div className="mt-6 grid gap-4 sm:grid-cols-2">
+          {secteurs.map(([k, n]) => (
+            <div key={k} className="flex items-center justify-between rounded-lg border border-line bg-paper p-5">
+              <span className="font-semibold text-navy">{SECTEURS_EN[k] ?? k}</span>
+              <span className="rounded-full bg-teal-soft px-3 py-1 text-sm font-bold text-navy">{n}</span>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-6 text-sm text-grey">
+          Nature of the assignments: technical design supervision and works inspection of the
+          technology packages (electrical, low-current, HVAC, plumbing, safety).
+        </p>
+
         <div className="mt-8">
-          <Callout title="Engagement framework — applicable to all the sheets above" variant="gold">
-            {CADRE_GEQUIPS_EN}
+          <Callout title="Engagement framework" variant="gold">
+            {CADRE_GEQUIPS_EN} Detailed references and CVs available on request.
           </Callout>
         </div>
       </Section>
 
-      <Section>
+      <Section id="dossier">
+        <div className="rounded-lg border border-line bg-navy p-8 text-white md:flex md:items-center md:justify-between md:gap-8">
+          <div>
+            <p className="eyebrow text-gold">On request</p>
+            <h2 className="title-2 mt-2 !text-white">Full reference dossier &amp; detailed CVs</h2>
+            <p className="mt-3 max-w-2xl text-white/80">
+              Detailed reference sheets (clients, service values, staffing), curricula vitae and
+              written availability commitments are shared with qualified partners, donors and
+              contracting authorities, after the request has been assessed and, where relevant, under
+              a confidentiality agreement.
+            </p>
+          </div>
+          <Link
+            href={dossierHref}
+            className="mt-6 inline-block shrink-0 rounded-md bg-gold px-6 py-3 font-semibold text-navy no-underline hover:bg-gold-soft md:mt-0"
+          >
+            Request the dossier
+          </Link>
+        </div>
+      </Section>
+
+      <Section tone="light">
         <SectionTitle eyebrow="Mobilisation mechanism" title="How these capacities serve your programmes" />
         <div className="prose-x max-w-3xl">
           <p>
@@ -94,8 +133,8 @@ export default function ExpertisePageEn() {
           </p>
           <p>
             In practice: when an ODT territorial programme requires airport, hydraulic or
-            public-facility engineering, these references and the corresponding experts are
-            mobilised in the forms expected by donors (CVs, reference sheets, written commitments).
+            public-facility engineering, the corresponding references and experts are mobilised in the
+            forms expected by donors (CVs, reference sheets, written commitments) — shared on request.
           </p>
         </div>
       </Section>

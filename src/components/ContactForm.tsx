@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const orgTypes = [
   "Commune / collectivité territoriale",
@@ -18,6 +18,7 @@ const objets = [
   "Étudier un modèle de programme (agropole, corridor, pôle, bassin)",
   "Partenariat bailleur / financement",
   "Observatoire : demande d'analyse territoriale",
+  "Demande du dossier de références (missions & CV détaillés)",
   "Autre",
 ];
 
@@ -37,6 +38,7 @@ const EN = {
     "Explore a programme model (agropole, corridor, pole, basin)",
     "Donor partnership / financing",
     "Observatory: request a territorial analysis",
+    "Request the reference dossier (assignments & detailed CVs)",
     "Other",
   ],
 };
@@ -77,6 +79,13 @@ export default function ContactForm({ lang = "fr" }: { lang?: "fr" | "en" }) {
   const OB = en ? EN.objets : objets;
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
   const [errMsg, setErrMsg] = useState("");
+  const [objet, setObjet] = useState("");
+
+  // Pré-sélection de l'objet via l'URL (ex. bouton « dossier de références » → /contact?objet=…).
+  useEffect(() => {
+    const o = new URLSearchParams(window.location.search).get("objet");
+    if (o) setObjet(o);
+  }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -154,11 +163,12 @@ export default function ContactForm({ lang = "fr" }: { lang?: "fr" | "en" }) {
       </div>
       <div className="sm:col-span-2">
         <label className={label} htmlFor="objet">{L.objet}</label>
-        <select id="objet" name="objet" className={field} defaultValue="">
+        <select id="objet" name="objet" className={field} value={objet} onChange={(e) => setObjet(e.target.value)}>
           <option value="" disabled>{L.select}</option>
           {OB.map((o) => (
             <option key={o} value={o}>{o}</option>
           ))}
+          {objet && !OB.includes(objet) ? <option value={objet}>{objet}</option> : null}
         </select>
       </div>
       <div className="sm:col-span-2">
