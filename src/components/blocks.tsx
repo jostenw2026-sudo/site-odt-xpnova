@@ -222,7 +222,13 @@ export default function Footer() {
             © {new Date().getFullYear()} {site.legalName} — {site.legal.forme}, capital {site.legal.capital} ·
             RCCM {site.legal.rccm} · NIU {site.legal.niu}
           </p>
-          <p className="flex gap-4">
+          <p className="flex flex-wrap gap-4">
+            <Link href={en ? "/en/faq" : "/faq"} className="text-white/55 no-underline hover:text-gold">
+              FAQ
+            </Link>
+            <Link href={en ? "/en/glossaire" : "/glossaire"} className="text-white/55 no-underline hover:text-gold">
+              {en ? "Glossary" : "Glossaire"}
+            </Link>
             <Link href="/mentions-legales" className="text-white/55 no-underline hover:text-gold">
               {en ? "Legal notice" : "Mentions légales"}
             </Link>

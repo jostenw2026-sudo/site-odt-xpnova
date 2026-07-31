@@ -31,6 +31,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/odt/expertise-mobilisable", 0.8),
     stat("/odt/esg-inclusion", 0.6),
     stat("/ressources", 0.5),
+    stat("/faq", 0.6),
+    stat("/glossaire", 0.6),
     stat("/contact", 0.7),
     // Miroir anglais
     stat("/en", 0.9),
@@ -50,6 +52,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     stat("/en/odt/expertise-mobilisable", 0.7),
     stat("/en/odt/esg-inclusion", 0.5),
     stat("/en/ressources", 0.4),
+    stat("/en/faq", 0.5),
+    stat("/en/glossaire", 0.5),
     stat("/en/contact", 0.6),
   ];
 }
