@@ -83,3 +83,39 @@ export async function odooSearchRead(
 ): Promise<Record<string, unknown>[]> {
   return execute<Record<string, unknown>[]>(model, 'search_read', [domain], { fields, ...kwargs });
 }
+
+/**
+ * Lit un document binaire de la GED (module Documents, Odoo 19) par nom exact,
+ * éventuellement restreint à un espace (dossier) par son nom. Retourne le
+ * contenu en base64 + mimetype, ou null si absent/indisponible. Sert à faire
+ * d'Odoo le référentiel des documents servis par le site.
+ */
+export async function getDocumentDatas(
+  name: string,
+  folderName?: string,
+): Promise<{ datas: string; mimetype: string; name: string } | null> {
+  try {
+    const domain: unknown[] = [["name", "=", name]];
+    if (folderName) {
+      const folders = await odooSearchRead(
+        "documents.document",
+        [["type", "=", "folder"], ["name", "=", folderName]],
+        ["id"],
+        { limit: 1 },
+      );
+      if (folders.length) domain.push(["folder_id", "=", folders[0].id]);
+    }
+    const rows = await odooSearchRead("documents.document", domain, ["datas", "mimetype", "name"], { limit: 1 });
+    const r = rows[0];
+    if (r && typeof r.datas === "string" && r.datas) {
+      return {
+        datas: r.datas,
+        mimetype: typeof r.mimetype === "string" && r.mimetype ? r.mimetype : "application/pdf",
+        name: String(r.name),
+      };
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}

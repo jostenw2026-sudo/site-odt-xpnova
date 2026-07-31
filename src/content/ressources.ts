@@ -15,7 +15,11 @@ export type Ressource = {
   badge: string;
   file?: string;
   href?: string;
+  gedName?: string; // nom exact du document dans la GED Odoo (espace « Ressources du site »)
 };
+
+// Espace GED (module Documents Odoo) où vivent les documents servis par le site.
+export const GED_SPACE = "Ressources du site";
 
 export const ressources: Ressource[] = [
   {
@@ -25,6 +29,7 @@ export const ressources: Ressource[] = [
     mode: "request",
     badge: "Sur demande",
     file: "note-presentation-odt.pdf",
+    gedName: "Note de presentation ODT",
   },
   {
     key: "publications",
@@ -41,6 +46,7 @@ export const ressources: Ressource[] = [
     mode: "request",
     badge: "Sur demande motivée",
     file: "fiche-reference-innova.pdf",
+    gedName: "Fiche de reference INNOVA",
   },
   {
     key: "documents-institutionnels",
@@ -49,6 +55,7 @@ export const ressources: Ressource[] = [
     mode: "request",
     badge: "Sur demande motivée",
     file: "dossier-institutionnel.pdf",
+    gedName: "Documents institutionnels (RCCM, NIU, statuts)",
   },
 ];
 
@@ -60,6 +67,7 @@ export const ressourcesEn: Ressource[] = [
     mode: "request",
     badge: "On request",
     file: "note-presentation-odt.pdf",
+    gedName: "Note de presentation ODT",
   },
   {
     key: "publications",
@@ -76,6 +84,7 @@ export const ressourcesEn: Ressource[] = [
     mode: "request",
     badge: "On justified request",
     file: "fiche-reference-innova.pdf",
+    gedName: "Fiche de reference INNOVA",
   },
   {
     key: "documents-institutionnels",
@@ -84,5 +93,6 @@ export const ressourcesEn: Ressource[] = [
     mode: "request",
     badge: "On justified request",
     file: "dossier-institutionnel.pdf",
+    gedName: "Documents institutionnels (RCCM, NIU, statuts)",
   },
 ];

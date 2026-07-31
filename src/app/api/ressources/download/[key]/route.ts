@@ -1,15 +1,21 @@
 import { NextResponse } from "next/server";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { ressources } from "@/content/ressources";
+import { ressources, GED_SPACE } from "@/content/ressources";
 import { verifyDownloadToken } from "@/lib/ressources-tokens";
+import { odooConfigured, getDocumentDatas } from "@/lib/odoo";
 
 export const runtime = "nodejs";
 
 /**
- * GET /api/ressources/download/[key] — sert le PDF privé d'un document « request »
- * (private/ressources/<file>), uniquement avec un jeton `?dl=` valide émis après
- * validation du propriétaire (lien expirant 7 jours). Jamais exposé en statique.
+ * GET /api/ressources/download/[key] — sert le PDF privé d'un document « request »,
+ * uniquement avec un jeton `?dl=` valide (lien expirant 7 jours, émis après
+ * validation du propriétaire).
+ *
+ * Référentiel = la GED Odoo (module Documents, espace « Ressources du site ») :
+ * le fichier est d'abord lu depuis Odoo par son nom exact (doc.gedName). Repli
+ * automatique sur le PDF local (private/ressources/<file>) si Odoo est
+ * indisponible ou le document absent — aucune régression.
  */
 export async function GET(req: Request, ctx: { params: Promise<{ key: string }> }) {
   const { key } = await ctx.params;
@@ -25,12 +31,31 @@ export async function GET(req: Request, ctx: { params: Promise<{ key: string }> 
       { status: 403 },
     );
   }
+
+  const filename = doc.file;
+
+  // 1) Référentiel Odoo (GED) — source de vérité.
+  if (odooConfigured() && doc.gedName) {
+    const d = await getDocumentDatas(doc.gedName, GED_SPACE);
+    if (d?.datas) {
+      const buf = Buffer.from(d.datas, "base64");
+      return new NextResponse(new Uint8Array(buf), {
+        headers: {
+          "Content-Type": d.mimetype || "application/pdf",
+          "Content-Disposition": `attachment; filename="${filename}"`,
+          "Cache-Control": "private, no-store",
+        },
+      });
+    }
+  }
+
+  // 2) Repli : PDF local privé (secours si Odoo indisponible).
   try {
-    const buf = await readFile(path.join(process.cwd(), "private", "ressources", doc.file));
+    const buf = await readFile(path.join(process.cwd(), "private", "ressources", filename));
     return new NextResponse(new Uint8Array(buf), {
       headers: {
         "Content-Type": "application/pdf",
-        "Content-Disposition": `attachment; filename="${doc.file}"`,
+        "Content-Disposition": `attachment; filename="${filename}"`,
         "Cache-Control": "private, no-store",
       },
     });
