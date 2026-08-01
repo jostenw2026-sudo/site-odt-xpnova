@@ -29,7 +29,6 @@ export const navEn = [
   { label: "About ODT", href: "/en/odt" },
   { label: "Explore", href: "/en/explorer" },
   { label: "Programmes", href: "/en/programmes" },
-  { label: "Observatory", href: "/en/observatoire" },
   { label: "Financing", href: "/en/financement" },
   { label: "Methodology", href: "/en/methodologie" },
   { label: "Resources", href: "/en/ressources" },
@@ -38,7 +37,7 @@ export const navEn = [
 
 export const ctaEn = {
   primary: { label: "Submit a territorial project", href: "/en/contact" },
-  secondary: { label: "Explore the Observatory", href: "/en/observatoire" },
+  secondary: { label: "Discover our method", href: "/en/methodologie" },
 } as const;
 
 export const STATUTS_EN: Record<StatutKey, { label: string; desc: string }> = {

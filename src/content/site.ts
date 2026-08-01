@@ -47,7 +47,6 @@ export const nav = [
   { label: "L'ODT", href: "/odt" },
   { label: "Explorer", href: "/explorer" },
   { label: "Programmes", href: "/programmes" },
-  { label: "Observatoire", href: "/observatoire" },
   { label: "Financement", href: "/financement" },
   { label: "Méthodologie", href: "/methodologie" },
   { label: "Ressources", href: "/ressources" },
@@ -56,7 +55,7 @@ export const nav = [
 
 export const cta = {
   primary: { label: "Soumettre un projet territorial", href: "/contact" },
-  secondary: { label: "Explorer l'Observatoire", href: "/observatoire" },
+  secondary: { label: "Découvrir notre méthode", href: "/methodologie" },
 } as const;
 
 /** Statuts de programmes — doctrine d'honnêteté (affichage obligatoire). */
