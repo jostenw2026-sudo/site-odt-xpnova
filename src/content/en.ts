@@ -26,7 +26,7 @@ export const siteEn = {
 } as const;
 
 export const navEn = [
-  { label: "About ODT", href: "/en/odt" },
+  { label: "Overview", href: "/en/odt" },
   { label: "Explore", href: "/en/explorer" },
   { label: "Programmes", href: "/en/programmes" },
   { label: "Financing", href: "/en/financement" },
